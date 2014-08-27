@@ -1,0 +1,30 @@
+#! /bin/python
+import sys
+import os
+
+#declaration of server goes here
+server = {}
+server["server1"] = "server@domain_name_OR_ip_address"
+
+#ensure that arguments are passed
+if len(sys.argv) < 2:
+    print "You are missing command line arguments. The syntax is server [show|SERVER_NAME]"
+    sys.exit(2)
+
+#check the listing all servers are required
+if sys.argv[1] == "show":
+    print "\nServers"
+    print "======="
+    for servers in server.keys():
+        print servers
+    print
+    sys.exit(1)
+
+#check if the server name is valid
+if sys.argv[1] not in server.keys():
+    print "Invalid Server name"
+    sys.exit(3)
+else:
+    #connect to the server
+    print "Connecting to " + sys.argv[1] + "........."
+    os.system("ssh %s" % (server[sys.argv[1]]))
